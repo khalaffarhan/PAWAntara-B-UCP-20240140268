@@ -1,0 +1,33 @@
+<header class="site-header" id="siteHeader">
+  <nav class="navbar" aria-label="Navigasi utama">
+    <a href="/" class="brand">
+      <span class="brand-mark"><i class="bi bi-basket3-fill"></i></span>
+      <span class="brand-text">
+        Toko Sembako <strong>Ariesta</strong>
+      </span>
+    </a>
+
+    <button
+      class="hamburger"
+      id="hamburgerBtn"
+      aria-label="Buka menu navigasi"
+      aria-expanded="false"
+      aria-controls="navMenu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-menu" id="navMenu">
+      <ul class="nav-links">
+        <li><a href="/" class="<%= activePage === 'home' ? 'active' : '' %>">Beranda</a></li>
+        <li><a href="/produk" class="<%= activePage === 'produk' ? 'active' : '' %>">Produk</a></li>
+        <li><a href="/tanya-ai" class="<%= activePage === 'tanya-ai' ? 'active' : '' %>">Tanya AI</a></li>
+      </ul>
+      <a href="/tanya-ai" class="btn btn-primary btn-sm nav-cta">
+        <i class="bi bi-chat-dots-fill"></i> Tanya Sekarang
+      </a>
+    </div>
+  </nav>
+</header>
