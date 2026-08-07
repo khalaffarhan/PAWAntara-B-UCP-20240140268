@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="blob blob-1"></span>
+        <span class="blob blob-2"></span>
+      </div>
+
+      <div class="container hero-inner">
+        <div class="hero-copy fade-up">
+          <span class="eyebrow"><i class="bi bi-stars"></i> Belanja sembako, jadi lebih ringan</span>
+          <h1>
+            Kebutuhan Dapur <span class="text-accent">Sat Set</span>,
+            Antar Sampai Rumah
+          </h1>
+          <p class="hero-desc">
+            Toko Sembako Ariesta melayani warga sekitar dengan harga jujur dan
+            stok yang selalu diperbarui. Cek harga, pesan, atau tanya langsung
+            ke asisten AI kami — tanpa perlu menunggu balasan chat manual.
+          </p>
+          <div class="hero-actions">
+            <a href="/produk" class="btn btn-accent btn-lg">
+              <i class="bi bi-basket3-fill"></i> Belanja Sekarang
+            </a>
+            <a href="/tanya-ai" class="btn btn-ghost-light btn-lg">
+              <i class="bi bi-chat-dots-fill"></i> Tanya AI
+            </a>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-art-card main-card">
+            <i class="bi bi-basket3-fill"></i>
+          </div>
+          <div class="floating-chip chip-1"><i class="bi bi-egg-fried"></i> Telur Segar</div>
+          <div class="floating-chip chip-2"><i class="bi bi-droplet-fill"></i> Minyak Goreng</div>
+          <div class="floating-chip chip-3"><i class="bi bi-box-seam-fill"></i> Gula Pasir</div>
+          <div class="floating-chip chip-4"><i class="bi bi-truck"></i> Diantar Hari Ini</div>
+        </div>
+      </div>
+
+      <!-- Stat strip -->
+      <div class="container">
+        <div class="stats-strip fade-up">
+          <div class="stat-item">
+            <span class="stat-number">500+</span>
+            <span class="stat-label">Pelanggan</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">100+</span>
+            <span class="stat-label">Produk</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">24 Jam</span>
+            <span class="stat-label">Respon Cepat</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number">4.9<i class="bi bi-star-fill accent-star"></i></span>
+            <span class="stat-label">Rating Pelanggan</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="section features">
+      <div class="container">
+        <div class="section-heading fade-up">
+          <span class="eyebrow">Kenapa Ariesta</span>
+          <h2>Belanja Nyaman, Hati Tenang</h2>
+          <p>Kami menjaga setiap pesanan seperti belanja untuk keluarga sendiri.</p>
+        </div>
+
+        <div class="feature-grid">
+          <div class="feature-card fade-up">
+            <div class="feature-icon"><i class="bi bi-truck"></i></div>
+            <h3>Gratis Ongkir</h3>
+            <p>Gratis antar untuk wilayah sekitar toko, minimum belanja berlaku.</p>
+          </div>
+          <div class="feature-card fade-up">
+            <div class="feature-icon"><i class="bi bi-patch-check-fill"></i></div>
+            <h3>Produk Berkualitas</h3>
+            <p>Stok selalu segar dan dicek langsung sebelum dikemas untuk Anda.</p>
+          </div>
+          <div class="feature-card fade-up">
+            <div class="feature-icon"><i class="bi bi-cash-coin"></i></div>
+            <h3>Harga Murah</h3>
+            <p>Harga bersaing setara pasar, cocok untuk belanja bulanan keluarga.</p>
+          </div>
+          <div class="feature-card fade-up">
+            <div class="feature-icon"><i class="bi bi-lightning-charge-fill"></i></div>
+            <h3>Pengiriman Cepat</h3>
+            <p>Pesanan diproses cepat, sampai di hari yang sama untuk area dekat.</p>
+          </div>
+          <div class="feature-card fade-up">
+            <div class="feature-icon"><i class="bi bi-headset"></i></div>
+            <h3>Customer Service</h3>
+            <p>Tim kami siap membantu lewat WhatsApp untuk pertanyaan khusus.</p>
+          </div>
+          <div class="feature-card fade-up">
+            <div class="feature-icon"><i class="bi bi-robot"></i></div>
+            <h3>Tanya AI</h3>
+            <p>Tanya stok, harga, atau jam buka — dijawab otomatis kapan saja.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PRODUK PILIHAN ============ -->
+    <section class="section products-preview">
+      <div class="container">
+        <div class="section-heading split fade-up">
+          <div>
+            <span class="eyebrow">Produk Pilihan</span>
+            <h2>Paling Sering Diborong Pelanggan</h2>
+          </div>
+          <a href="/produk" class="btn btn-outline">
+            Lihat Semua Produk <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="product-grid">
+          <% featured.forEach(function(p) { %>
+            <article class="product-card fade-up">
+              <a href="/produk/<%= p.id %>" class="product-media">
+                <span class="badge-category"><%= p.category %></span>
+                <i class="bi <%= p.icon %>"></i>
+              </a>
+              <div class="product-body">
+                <h3 class="product-name"><%= p.name %></h3>
+                <p class="product-unit"><%= p.unit %></p>
+                <div class="product-footer">
+                  <span class="product-price"><%= formatRupiah(p.price) %></span>
+                  <span class="product-stock <%= p.stock < 10 ? 'low' : '' %>">
+                    Stok <%= p.stock %>
+                  </span>
+                </div>
+                <a href="/produk/<%= p.id %>" class="btn btn-primary btn-block">
+                  Lihat Detail
+                </a>
+              </div>
+            </article>
+          <% }); %>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CTA TANYA AI ============ -->
+    <section class="section cta-ai">
+      <div class="container cta-ai-inner fade-up">
+        <div class="cta-ai-icon"><i class="bi bi-robot"></i></div>
+        <div class="cta-ai-copy">
+          <h2>Masih Bingung Mau Belanja Apa?</h2>
+          <p>Tanya langsung ke asisten kami — stok, harga, sampai jam buka, semua bisa dijawab.</p>
+        </div>
+        <a href="/tanya-ai" class="btn btn-accent btn-lg">
+          <i class="bi bi-chat-dots-fill"></i> Mulai Tanya AI
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+  <%- include('partials/scripts') %>
+</body>
+</html>
