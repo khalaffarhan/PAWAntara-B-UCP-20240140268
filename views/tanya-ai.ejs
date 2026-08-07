@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main>
+    <section class="page-header page-header-compact">
+      <div class="container fade-up">
+        <span class="eyebrow"><i class="bi bi-robot"></i> Asisten Toko</span>
+        <h1>Tanya AI</h1>
+        <p>Tanya jam buka, ongkir, cara bayar, atau ketersediaan stok.</p>
+      </div>
+    </section>
+
+    <section class="section chat-section">
+      <div class="container chat-container fade-up">
+        <div class="chat-window">
+          <div class="chat-header">
+            <div class="chat-avatar ai-avatar"><i class="bi bi-robot"></i></div>
+            <div>
+              <h3>Asisten Ariesta</h3>
+              <span class="chat-status"><span class="dot"></span> Online</span>
+            </div>
+          </div>
+
+          <div class="chat-body" id="chatBody">
+            <div class="chat-bubble bubble-ai">
+              <div class="chat-avatar ai-avatar small"><i class="bi bi-robot"></i></div>
+              <div class="bubble-content">
+                Halo! 👋 Saya asisten Toko Sembako Ariesta. Ada yang bisa saya
+                bantu soal stok, harga, ongkir, atau jam buka toko?
+              </div>
+            </div>
+          </div>
+
+          <form class="chat-input-row" id="chatForm">
+            <label for="chatInput" class="sr-only">Tulis pertanyaan Anda</label>
+            <input
+              type="text"
+              id="chatInput"
+              name="message"
+              placeholder="Tulis pertanyaan Anda di sini..."
+              autocomplete="off"
+              required
+            />
+            <button type="submit" class="btn-send" aria-label="Kirim pertanyaan">
+              <i class="bi bi-send-fill"></i>
+            </button>
+          </form>
+        </div>
+
+        <p class="chat-disclaimer">
+          <i class="bi bi-info-circle"></i>
+          Balasan asisten ini masih berupa simulasi tampilan (UI demo).
+          Logika jawaban otomatis dari server akan diaktifkan pada tahap
+          pengembangan berikutnya.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+  <%- include('partials/scripts') %>
+</body>
+</html>
