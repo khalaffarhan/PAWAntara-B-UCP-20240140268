@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <%- include('partials/head') %>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <main>
+    <section class="page-header">
+      <div class="container fade-up">
+        <span class="eyebrow"><i class="bi bi-basket3-fill"></i> Katalog</span>
+        <h1>Semua Produk Sembako</h1>
+        <p>Cari kebutuhan dapur Anda, harga &amp; stok selalu diperbarui.</p>
+      </div>
+    </section>
+
+    <section class="section produk-section">
+      <div class="container">
+        <!-- Filter & search -->
+        <form class="filter-bar fade-up" action="/produk" method="GET">
+          <div class="search-box">
+            <i class="bi bi-search"></i>
+            <input
+              type="search"
+              name="search"
+              placeholder="Cari produk, mis. beras, minyak..."
+              value="<%= activeSearch %>"
+              aria-label="Cari produk"
+            />
+          </div>
+          <% if (activeSearch) { %>
+            <input type="hidden" name="kategori" value="<%= activeKategori %>" />
+          <% } %>
+          <button type="submit" class="btn btn-primary">Cari</button>
+        </form>
+
+        <div class="category-pills fade-up">
+          <a
+            href="/produk<%= activeSearch ? '?search=' + activeSearch : '' %>"
+            class="pill <%= activeKategori === 'semua' ? 'active' : '' %>"
+          >Semua</a>
+          <% categories.forEach(function(c) { %>
+            <a
+              href="/produk?kategori=<%= encodeURIComponent(c) %><%= activeSearch ? '&search=' + encodeURIComponent(activeSearch) : '' %>"
+              class="pill <%= activeKategori.toLowerCase() === c.toLowerCase() ? 'active' : '' %>"
+            ><%= c %></a>
+          <% }); %>
+        </div>
+
+        <!-- Hasil -->
+        <p class="result-count fade-up">
+          Menampilkan <strong><%= products.length %></strong> produk
+          <% if (activeSearch) { %> untuk "<strong><%= activeSearch %></strong>"<% } %>
+        </p>
+
+        <% if (products.length === 0) { %>
+          <div class="empty-state fade-up">
+            <i class="bi bi-emoji-frown"></i>
+            <h3>Produk tidak ditemukan</h3>
+            <p>Coba kata kunci lain atau lihat semua kategori produk kami.</p>
+            <a href="/produk" class="btn btn-outline">Reset Filter</a>
+          </div>
+        <% } else { %>
+          <div class="product-grid">
+            <% products.forEach(function(p) { %>
+              <article class="product-card fade-up">
+                <a href="/produk/<%= p.id %>" class="product-media">
+                  <span class="badge-category"><%= p.category %></span>
+                  <i class="bi <%= p.icon %>"></i>
+                </a>
+                <div class="product-body">
+                  <h3 class="product-name"><%= p.name %></h3>
+                  <p class="product-unit"><%= p.unit %></p>
+                  <div class="product-footer">
+                    <span class="product-price"><%= formatRupiah(p.price) %></span>
+                    <span class="product-stock <%= p.stock < 10 ? 'low' : '' %>">
+                      Stok <%= p.stock %>
+                    </span>
+                  </div>
+                  <a href="/produk/<%= p.id %>" class="btn btn-primary btn-block">
+                    Lihat Detail
+                  </a>
+                </div>
+              </article>
+            <% }); %>
+          </div>
+        <% } %>
+      </div>
+    </section>
+  </main>
+
+  <%- include('partials/footer') %>
+  <%- include('partials/scripts') %>
+</body>
+</html>
