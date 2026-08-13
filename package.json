@@ -1,7 +1,7 @@
 {
   "name": "toko-sembako-ariesta",
   "version": "1.0.0",
-  "description": "Website & REST API Toko Sembako Ariesta - Sprint 1 (PAW UCP1)",
+  "description": "Website & REST API Toko Sembako Ariesta - Sprint 1 & 2 (PAW UCP1)",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
@@ -16,8 +16,11 @@
   "author": "Mahasiswa PAW",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
     "ejs": "^3.1.10",
-    "express": "^4.22.2"
+    "express": "^4.22.2",
+    "express-session": "^1.19.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
