@@ -1,11 +1,16 @@
 // routes/pages.js
-// Route halaman (server-side render via EJS). Sprint 1: data masih dari array dummy.
+// Route halaman (server-side render via EJS).
+// Sprint 1: Beranda masih pakai array dummy langsung (cukup untuk preview statis).
+// Sprint 2: halaman Produk (publik) & Detail Produk sekarang mengambil data secara
+// DINAMIS lewat GET /api/products di sisi client (Fetch API), bukan hardcode SSR lagi —
+// EJS di sini hanya menyediakan shell/kerangka halaman, isi produk di-render oleh JS.
 
 const express = require("express");
 const router = express.Router();
 const products = require("../data/products");
+const { requirePageAuth } = require("../middleware/auth");
 
-// GET / — Beranda
+// GET / — Beranda (preview produk masih SSR dari array, cukup untuk tampilan awal)
 router.get("/", (req, res) => {
   const featured = products.slice(0, 4);
   res.render("index", {
@@ -15,59 +20,46 @@ router.get("/", (req, res) => {
   });
 });
 
-// GET /produk — Daftar produk + filter lewat query string (?kategori= / ?search=)
+// GET /produk — Daftar produk (shell EJS; data & filter diambil client-side via
+// GET /api/products?kategori=&search= memakai Fetch API, lihat public/js/produk.js)
 router.get("/produk", (req, res) => {
-  const { kategori, search } = req.query;
-  let result = products;
-
-  if (kategori && kategori !== "semua") {
-    result = result.filter(
-      (p) => p.category.toLowerCase() === kategori.toLowerCase()
-    );
-  }
-
-  if (search) {
-    const keyword = search.toLowerCase().trim();
-    result = result.filter((p) => p.name.toLowerCase().includes(keyword));
-  }
-
   const categories = [...new Set(products.map((p) => p.category))];
 
   res.render("produk", {
     title: "Produk",
     activePage: "produk",
-    products: result,
     categories,
-    activeKategori: kategori || "semua",
-    activeSearch: search || "",
   });
 });
 
-// GET /produk/:id — Detail produk (route dinamis)
+// GET /produk/:id — Detail produk (route dinamis; shell EJS, detail di-fetch
+// client-side dari GET /api/products/:id, lihat public/js/produk-detail.js)
 router.get("/produk/:id", (req, res) => {
-  const id = parseInt(req.params.id, 10);
-  const product = products.find((p) => p.id === id);
-
-  if (!product) {
-    return res.status(404).render("produk-detail", {
-      title: "Produk Tidak Ditemukan",
-      activePage: "produk",
-      product: null,
-    });
-  }
+  const id = req.params.id;
 
   res.render("produk-detail", {
-    title: product.name,
+    title: "Detail Produk",
     activePage: "produk",
-    product,
+    productId: id,
   });
 });
 
-// GET /tanya-ai — Halaman chat Tanya AI (UI saja, logic balasan menyusul di Sprint 2)
+// GET /tanya-ai — Halaman chat Tanya AI (fetch ke POST /api/chat, lihat public/js/main.js)
 router.get("/tanya-ai", (req, res) => {
   res.render("tanya-ai", {
     title: "Tanya AI",
     activePage: "tanya-ai",
+  });
+});
+
+// ── Sprint 2: Auth-related pages ──────────────────────────────
+
+// GET /dashboard — Dashboard admin/kasir (WAJIB LOGIN, dilindungi middleware auth)
+router.get("/dashboard", requirePageAuth, (req, res) => {
+  res.render("dashboard", {
+    title: "Dashboard Admin",
+    activePage: "dashboard",
+    adminUsername: req.session.user.username,
   });
 });
 
