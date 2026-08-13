@@ -5,7 +5,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   initHamburger();
   initButtonRipple();
-  initChatDemo();
+  initChat();
+  initLogout();
 });
 
 /* ---------------------------------------------------------
@@ -54,21 +55,15 @@ function initButtonRipple() {
 }
 
 /* ---------------------------------------------------------
-   3. Demo UI Tanya AI (belum terhubung ke backend — Sprint 1)
+   3. Tanya AI — terhubung ke POST /api/chat (Sprint 2)
 --------------------------------------------------------- */
-function initChatDemo() {
+function initChat() {
   const form = document.getElementById("chatForm");
   const input = document.getElementById("chatInput");
   const body = document.getElementById("chatBody");
   if (!form || !input || !body) return;
 
-  const demoReplies = [
-    "Terima kasih sudah bertanya! Fitur balasan otomatis dari server sedang disiapkan dan akan aktif pada tahap pengembangan berikutnya.",
-    "Pertanyaan Anda sudah tercatat. Untuk saat ini, silakan hubungi kami langsung via tombol WhatsApp di halaman detail produk ya!",
-    "Asisten AI kami masih dalam tahap pengembangan tampilan (UI demo) — balasan cerdas menyusul segera 😊",
-  ];
-
-  form.addEventListener("submit", (e) => {
+  form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const message = input.value.trim();
@@ -80,12 +75,25 @@ function initChatDemo() {
 
     const loadingBubble = appendLoadingBubble();
 
-    // Simulasi delay balasan (dummy, tanpa request ke server)
-    setTimeout(() => {
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message }),
+      });
+      const result = await res.json();
+
       loadingBubble.remove();
-      const reply = demoReplies[Math.floor(Math.random() * demoReplies.length)];
-      appendBubble("ai", reply);
-    }, 1100);
+
+      if (res.ok && result.status === "success") {
+        appendBubble("ai", result.data.reply);
+      } else {
+        appendBubble("ai", result.message || "Maaf, terjadi kesalahan. Coba lagi ya.");
+      }
+    } catch (err) {
+      loadingBubble.remove();
+      appendBubble("ai", "Koneksi ke server terganggu. Silakan coba lagi.");
+    }
   });
 
   function appendBubble(role, text) {
@@ -123,4 +131,23 @@ function initChatDemo() {
     body.scrollTop = body.scrollHeight;
     return wrapper;
   }
+}
+
+/* ---------------------------------------------------------
+   4. Logout (tombol muncul di navbar semua halaman saat login) — Sprint 2
+--------------------------------------------------------- */
+function initLogout() {
+  const logoutBtn = document.getElementById("logoutBtn");
+  if (!logoutBtn) return;
+
+  logoutBtn.addEventListener("click", async () => {
+    logoutBtn.disabled = true;
+    try {
+      await fetch("/api/logout", { method: "POST" });
+    } catch (err) {
+      // abaikan error jaringan, tetap redirect ke halaman login
+    } finally {
+      window.location.href = "/login";
+    }
+  });
 }
