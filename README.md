@@ -213,3 +213,26 @@ mengarahkan ke topik yang didukung.
   langsung terlihat di halaman Produk publik tanpa restart server.
 - Password admin di-hash dengan bcrypt, kredensial mentah disimpan di
   `.env` yang di-gitignore.
+
+  Tampilan Beranda
+  <img width="1918" height="974" alt="image" src="https://github.com/user-attachments/assets/ae7572cb-4ed0-44f8-a4d9-96bf7b639792" />
+  <img width="1916" height="967" alt="image" src="https://github.com/user-attachments/assets/91dcfd50-842f-4993-89d1-ba58b81db9fc" />
+  <img width="1915" height="966" alt="image" src="https://github.com/user-attachments/assets/425805b5-3264-48b0-bd14-b87856b8edda" />
+  <img width="1919" height="978" alt="image" src="https://github.com/user-attachments/assets/5ff3a302-e881-4fb7-88c7-c305c02c21df" />
+  
+  Tampilan Produk
+  <img width="1919" height="975" alt="image" src="https://github.com/user-attachments/assets/2eda8337-62ea-4414-bbcc-e5fd145b13f1" />
+  <img width="1919" height="970" alt="image" src="https://github.com/user-attachments/assets/77a33935-0663-4151-a2f4-10c7b04ea624" />
+  <img width="1919" height="973" alt="image" src="https://github.com/user-attachments/assets/9c5cbfde-dfff-4401-82ff-c62335fafbfa" />
+
+  Fitur Tanya AI
+  <img width="1916" height="966" alt="image" src="https://github.com/user-attachments/assets/289b126d-17a0-442f-a68a-ff9057d9f5ee" />
+  <img width="1913" height="968" alt="image" src="https://github.com/user-attachments/assets/f9b6f3e5-8d78-4cba-8dd9-3c8fefbc4fb0" />
+
+  Fitur Login
+  <img width="1919" height="978" alt="image" src="https://github.com/user-attachments/assets/16829153-27b0-4cbf-8397-d5f34d121184" />
+
+  Tampilan Dashboard Admin
+  <img width="1919" height="974" alt="image" src="https://github.com/user-attachments/assets/e227bf6d-46b8-4433-8a22-5e26e1175908" />
+  <img width="1919" height="970" alt="image" src="https://github.com/user-attachments/assets/707d8731-2761-4f76-b574-675e731949ae" />
+  <img width="1918" height="969" alt="image" src="https://github.com/user-attachments/assets/d528932c-5edb-4eec-8e72-8754cde31974" />
