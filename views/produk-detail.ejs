@@ -7,70 +7,16 @@
   <%- include('partials/navbar') %>
 
   <main>
-    <% if (!product) { %>
-      <section class="section not-found-section">
-        <div class="container empty-state fade-up">
-          <i class="bi bi-box-seam"></i>
-          <h1>Produk Tidak Ditemukan</h1>
-          <p>Maaf, produk yang Anda cari tidak tersedia atau sudah tidak ada di katalog kami.</p>
-          <a href="/produk" class="btn btn-primary">
-            <i class="bi bi-arrow-left"></i> Kembali ke Produk
-          </a>
-        </div>
-      </section>
-    <% } else { %>
-      <section class="section detail-section">
-        <div class="container">
-          <nav class="breadcrumb fade-up" aria-label="breadcrumb">
-            <a href="/">Beranda</a> <i class="bi bi-chevron-right"></i>
-            <a href="/produk">Produk</a> <i class="bi bi-chevron-right"></i>
-            <span><%= product.name %></span>
-          </nav>
-
-          <div class="detail-grid fade-up">
-            <div class="detail-media">
-              <span class="badge-category"><%= product.category %></span>
-              <i class="bi <%= product.icon %>"></i>
-            </div>
-
-            <div class="detail-info">
-              <h1><%= product.name %></h1>
-              <p class="detail-unit"><i class="bi bi-box"></i> Kemasan: <%= product.unit %></p>
-
-              <div class="detail-price-row">
-                <span class="detail-price"><%= formatRupiah(product.price) %></span>
-                <span class="product-stock <%= product.stock < 10 ? 'low' : '' %>">
-                  <i class="bi bi-check-circle-fill"></i> Stok tersedia: <%= product.stock %>
-                </span>
-              </div>
-
-              <p class="detail-desc"><%= product.description %></p>
-
-              <div class="detail-actions">
-                <a
-                  href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20tanya%20stok%20<%= encodeURIComponent(product.name) %>"
-                  target="_blank"
-                  rel="noopener"
-                  class="btn btn-primary btn-lg"
-                >
-                  <i class="bi bi-whatsapp"></i> Pesan via WhatsApp
-                </a>
-                <a href="/tanya-ai" class="btn btn-ghost btn-lg">
-                  <i class="bi bi-robot"></i> Tanya AI Dulu
-                </a>
-              </div>
-
-              <a href="/produk" class="back-link">
-                <i class="bi bi-arrow-left"></i> Kembali ke semua produk
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
-    <% } %>
+    <!-- Konten diisi dinamis oleh public/js/produk-detail.js lewat GET /api/products/:id -->
+    <section class="section detail-section" id="detailContainer" data-product-id="<%= productId %>">
+      <div class="container">
+        <p class="table-loading fade-up"><i class="bi bi-arrow-repeat"></i> Memuat detail produk...</p>
+      </div>
+    </section>
   </main>
 
   <%- include('partials/footer') %>
   <%- include('partials/scripts') %>
+  <script src="/js/produk-detail.js"></script>
 </body>
 </html>
