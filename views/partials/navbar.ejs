@@ -24,10 +24,19 @@
         <li><a href="/" class="<%= activePage === 'home' ? 'active' : '' %>">Beranda</a></li>
         <li><a href="/produk" class="<%= activePage === 'produk' ? 'active' : '' %>">Produk</a></li>
         <li><a href="/tanya-ai" class="<%= activePage === 'tanya-ai' ? 'active' : '' %>">Tanya AI</a></li>
+        <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+          <li><a href="/dashboard" class="<%= activePage === 'dashboard' ? 'active' : '' %>">Dashboard</a></li>
+        <% } %>
       </ul>
-      <a href="/tanya-ai" class="btn btn-primary btn-sm nav-cta">
-        <i class="bi bi-chat-dots-fill"></i> Tanya Sekarang
-      </a>
+      <% if (typeof isLoggedIn !== 'undefined' && isLoggedIn) { %>
+        <button type="button" id="logoutBtn" class="btn btn-outline btn-sm nav-cta">
+          <i class="bi bi-box-arrow-right"></i> Logout
+        </button>
+      <% } else { %>
+        <a href="/login" class="btn btn-primary btn-sm nav-cta">
+          <i class="bi bi-shield-lock-fill"></i> Login Admin
+        </a>
+      <% } %>
     </div>
   </nav>
 </header>
